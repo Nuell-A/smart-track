@@ -781,6 +781,14 @@ select {
   width: 1.5rem;
 }
 
+.max-w-sm {
+  max-width: 24rem;
+}
+
+.max-w-xs {
+  max-width: 20rem;
+}
+
 .flex-col {
   flex-direction: column;
 }
