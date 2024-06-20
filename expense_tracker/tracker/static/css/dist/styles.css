@@ -856,15 +856,7 @@ select {
     display: block;
   }
 
-  .md\:inline {
-    display: inline;
-  }
-
   .md\:hidden {
     display: none;
-  }
-
-  .md\:flex-col {
-    flex-direction: column;
   }
 }
