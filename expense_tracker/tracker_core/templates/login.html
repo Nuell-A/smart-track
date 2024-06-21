@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Login - Track Smart {% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+    <div class="container text-center">
+        <h1 class="text-xl pt-4 pb-4">Login</h1>
+        <div>
+            <form method='POST'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="bg-gray-600 rounded text-white w-24 h-6 mt-5">Login</button>
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

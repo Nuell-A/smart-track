@@ -9,8 +9,35 @@
 </head>
 <body>
     {% block content%}
-        <h1 class=''>Hello World!</h1>
-        <p class="text-5xl">Future budget tracker.</p>
+    <div class="container mx-auto">    
+        <a href="/login" class="w-24 h-5 bg-gray-600 rounded text-gray-300 hover:text-white">Login</a>
+        <h1 class="hidden md:block text-xl pl-2 pt-8 mb-4">Monthly Budget</h1>
+        <h1 class="md:hidden text-xl text-center pt-8">Monthly Budget</h1>
+        <div class="hidden text-white md:flex justify-around text-center">
+            <div class="px-4 py-8 bg-gray-600 rounded max-w-sm w-full" id="budget-chart">
+                <p class="py-3">Charts for expenses/income</p>
+                <ul class="flex justify-around">
+                    <li>Income: 4000</li>
+                    <li>Expenses: 2500</li>
+                </ul>
+            </div>
+            <div class="px-4 py-8 bg-gray-600 text-white rounded max-w-sm w-full" id="budget-pie">
+                <p class="py-3">Pie chart for expenses</p>
+            </div>
+        </div>
+        <div class="p-2 flex-col md:hidden text-center">
+            <div class="px-2 py-8 bg-gray-600 text-white rounded max-w-80 w-full" id="budget-chart">
+                <p class="py-3">Charts for expenses/income</p>
+                <ul class="flex justify-around">
+                    <li>Income: 4000</li>
+                    <li>Expenses: 2500</li>
+                </ul>
+            </div>
+            <div class="mt-4 px-2 py-8 bg-gray-600 text-white rounded max-w-xs w-full" id="budget-pie">
+                <p class="py-3">Pie chart for expenses</p>
+            </div>
+        </div>
+    </div>
     {% endblock %}
 </body>
 </html>
