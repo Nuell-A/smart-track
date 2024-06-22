@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Logout - Track Smart {% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+        <h1 class="text-xl pt-4 pb-4">Logout</h1>
+        <div>
+            <form method='POST'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="bg-gray-600 rounded text-white w-24 h-6 mt-5">Logout</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Registration - Track Smart{% endblock %}
+
+{% block content %}
+	<h1 class="text-xl">Register</h1>
+	<form method="post">
+		{% csrf_token %}
+	    {{ form.as_p }}
+		<button type="submit" class="bg-gray-600 rounded text-white w-24 h-6 mt-5">Login</button>
+	</form>
+{% endblock %}
