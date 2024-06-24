@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Category
+from django.contrib.auth.decorators import login_required
+from .models import Category, Expense
 from .forms import RegistrationForm, CategoryForm
 
 # Create your views here.
@@ -7,6 +8,7 @@ def index(request):
     print("loading dashboard")
     return render(request, 'index.html')
 
+@login_required # Not accessible without logging in. 
 def budget(request):
     '''Accepts post requests to add categories.
     If form is submitted correctly, saves the entry into database with 
@@ -25,8 +27,16 @@ def budget(request):
         else:
             print("there was an error with the form")
     else:
+        '''Gets logged in user information to display user specific data.'''
+        user = request.user
+        categories = Category.objects.filter(user=user)
+        expenses = Expense.objects.filter(user=user)
+        context = {
+                'categories': categories,
+                'expenses': expenses
+        }
         form = CategoryForm
-    return render(request, 'budget.html', {'form': form})
+    return render(request, 'budget.html', {'form': form, **context})
     
 def expenses(request):
     print("loading expenses")
