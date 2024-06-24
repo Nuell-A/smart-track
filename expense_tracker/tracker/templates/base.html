@@ -18,7 +18,15 @@
 				<a href="/budget" class="block text-gray-300 hover:text-white">Budget</a>
 				<a href="/expenses" class="block text-gray-300 hover:text-white">Expenses</a>
 				<a href="/income" class="block text-gray-300 hover:text-white">Income</a>
-				<a href="/login" class="absolute bottom-0 block text-gray-300 hover:text-white pb-4">Login</a>
+				{% if request.user.is_authenticated %}
+					<p class="absolute bottom-4 block text-gray-300 pb-12">Hello, <br>{{ request.user }}</p>
+					<form method='POST' action="{% url 'logout' %}">
+						{% csrf_token %}
+						<button type="submit" class="absolute bottom-4 block text-gray-300 hover:text-white pb-4">Logout</button>
+					</form>
+				{% else %}
+					<a href="{% url 'login' %}" class="absolute bottom-4 block text-gray-300 hover:text-white pb-4">Login</a>
+				{% endif %}
 			</div>
 			<div class="md:hidden">
 				<button id="menu-btn" class="text-gray-300">
@@ -28,11 +36,16 @@
 				</button>
 			</div>
 			<div id="menu" class="hidden md:hidden">
-				<a href="/" class="block text-gray-300 hover:text-white py-1">Dashboard</a>
-				<a href="/budget" class="block text-gray-300 hover:text-white py-1">Budget</a>
-				<a href="/expenses" class="block text-gray-300 hover:text-white py-1">Expenses</a>
-				<a href="/income" class="block text-gray-300 hover:text-white py-1">Income</a>
-				<a href="/login" class="absolute bottom-4 block text-gray-300 hover:text-white pb-4">Login</a>
+				<a href="{% url 'index' %}" class="block text-gray-300 hover:text-white py-1">Dashboard</a>
+				<a href="{% url 'budget' %}" class="block text-gray-300 hover:text-white py-1">Budget</a>
+				<a href="{% url 'expenses' %}" class="block text-gray-300 hover:text-white py-1">Expenses</a>
+				<a href="{% url 'income' %}" class="block text-gray-300 hover:text-white py-1">Income</a>
+				{% if request.user.is_authenticated %}
+					<p class="text-gray-300 py-1">Hello, {{ request.user }}</p>
+					<a href="{% url 'logout' %}" class="block text-gray-300 hover:text-white py-1">Logout</a>
+				{% else %}
+					<a href="{% url 'login' %}" class="absolute bottom-4 block text-gray-300 hover:text-white pb-4">Login</a>
+				{% endif %}
 			</div>
 		</nav>
 		{% block content %}{% endblock %}

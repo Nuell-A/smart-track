@@ -6,7 +6,7 @@
     <div class="container text-center">
         <h1 class="text-xl pt-4 pb-4">Profile</h1>
         <div>
-		<p>Welcome, user!</p>
+		<p>Welcome, {{ request.user }}!</p>
         </div>
     </div>
 {% endblock %}

@@ -6,6 +6,8 @@ from .forms import RegistrationForm, CategoryForm
 # Create your views here.
 def index(request):
     print("loading dashboard")
+    print(request.user)
+    print(request.user.is_authenticated)
     return render(request, 'index.html')
 
 @login_required # Not accessible without logging in. 
@@ -13,6 +15,7 @@ def budget(request):
     '''Accepts post requests to add categories.
     If form is submitted correctly, saves the entry into database with 
     logged in user or with default user if no user is logged in.'''
+
     if request.method == 'POST':
         form = CategoryForm(request.POST)
         if form.is_valid():
@@ -37,11 +40,13 @@ def budget(request):
         }
         form = CategoryForm
     return render(request, 'budget.html', {'form': form, **context})
-    
+
+@login_required
 def expenses(request):
     print("loading expenses")
     return render(request, 'expenses.html')
 
+@login_required
 def income(request):
     print("loading income")
     return render(request, 'income.html')
@@ -55,8 +60,8 @@ def registration(request):
             return redirect('login')
     else:
         form = RegistrationForm
-    return render(request, 'registration.html', {'form': form})
-
+    return render(request, 'accounts/registration.html', {'form': form})
+@login_required
 def profile(request):
     '''Insert profile template and other information here once users login.'''
-    pass
+    return render(request, 'accounts/profile.html',)
