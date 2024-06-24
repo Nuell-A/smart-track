@@ -5,29 +5,21 @@
     <div class="container mx-auto">    
         <h1 class="hidden md:block text-xl pl-2 pt-8 mb-4">Budget</h1>
         <h1 class="md:hidden text-xl text-center pt-8">Budget</h1>
-        <div class="hidden text-white md:flex justify-around text-center">
-            <div class="px-4 py-8 bg-gray-600 rounded max-w-sm w-full" id="budget-chart">
-                <p class="py-3">Charts for expenses/income</p>
-                <ul class="flex justify-around">
-                    <li>Income: 4000</li>
-                    <li>Expenses: 2500</li>
-                </ul>
-            </div>
-            <div class="px-4 py-8 bg-gray-600 text-white rounded max-w-sm w-full" id="budget-pie">
-                <p class="py-3">Pie chart for expenses</p>
-            </div>
+        <div class="hidden md:flex justify-around text-center">
+		<form method="post">
+			{% csrf_token %}
+			<label class="pr-24" for="name">Add a category:</label>
+			<br>
+			{{ form.name }}
+			{% if form.name.errors %}
+				<div class="text-red-500 text-xs">{{ form.name.errors }}</div>
+			{% endif %}
+			<br>
+			<button type="submit" class="bg-gray-600 hover:text-white rounded text-gray-300 w-24 h-6 mt-2">Add Category</button>
+		</form>
         </div>
         <div class="p-2 flex-col md:hidden text-center">
-            <div class="px-2 py-8 bg-gray-600 text-white rounded max-w-80 w-full" id="budget-chart">
-                <p class="py-3">Charts for expenses/income</p>
-                <ul class="flex justify-around">
-                    <li>Income: 4000</li>
-                    <li>Expenses: 2500</li>
-                </ul>
-            </div>
-            <div class="mt-4 px-2 py-8 bg-gray-600 text-white rounded max-w-xs w-full" id="budget-pie">
-                <p class="py-3">Pie chart for expenses</p>
-            </div>
+            
         </div>
     </div>
 {% endblock %}
