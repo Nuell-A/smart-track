@@ -1,6 +1,7 @@
 # Extras
 ~$*
 .swp
+.py.swp
 
 # Environments 
 .env 
