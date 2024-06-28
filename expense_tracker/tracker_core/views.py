@@ -32,6 +32,7 @@ def budget(request):
     else:
         '''Gets logged in user information to display user specific data.'''
         user = request.user
+        # Fix categoires to filer by created_by and is_default
         categories = Category.objects.filter(user=user)
         expenses = Expense.objects.filter(user=user)
         context = {
@@ -43,7 +44,6 @@ def budget(request):
 
 @login_required
 def expenses(request):
-
     if request.method == 'POST':
         form = ExpenseForm(request.POST)
         if form.is_valid():
