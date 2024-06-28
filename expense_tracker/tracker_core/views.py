@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Category, Expense
-from .forms import RegistrationForm, CategoryForm
+from .models import Category, Expense, Income, Budget
+from .forms import RegistrationForm, CategoryForm, BudgetForm, ExpenseForm, IncomeForm
 
 # Create your views here.
 def index(request):
@@ -43,8 +43,26 @@ def budget(request):
 
 @login_required
 def expenses(request):
-    print("loading expenses")
-    return render(request, 'expenses.html')
+
+    if request.method == 'POST':
+        form = ExpenseForm(request.POST)
+        if form.is_valid():
+            expense = form.save(commit=False)
+            if request.user.is_authenticated:
+                expense.user = request.user
+            else:
+                expense.user_id = 1
+            
+            expense.save()
+            return redirect('expenses')
+    else:
+        user = request.user
+        expenses = Expense.objects.filter(user=user)
+        context = {
+            'expenses': expenses
+        }
+        form = ExpenseForm
+    return render(request, 'expenses.html', {'form': form, **context})
 
 @login_required
 def income(request):
