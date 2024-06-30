@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Category(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-
+    # Add created_by and is_default to model so that each user can see their own and default categories only
     def __str__(self) -> str:
         return f"{self.name}"
 
