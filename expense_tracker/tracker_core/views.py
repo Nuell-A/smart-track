@@ -40,30 +40,40 @@ def budget(request):
     logged in user or with default user if no user is logged in.'''
 
     if request.method == 'POST':
-        form = CategoryForm(request.POST)
-        if form.is_valid():
-            category = form.save(commit=False) # Does not save entry into database yet
+        category_form = CategoryForm(request.POST)
+        budget_form = BudgetForm(request.POST, user=request.user)
+        if category_form.is_valid():
+            category = category_form.save(commit=False) # Does not save entry into database yet
             if request.user.is_authenticated: # Checks if user is logged and sets user
                 category.user = request.user
             else:
                 category.user_id = 1 # If no user is logged in, uses default user
-            
             category.save()
             return redirect('budget')
-        else:
-            print("there was an error with the form")
+        
+        if budget_form.is_valid():
+            budget = budget_form.save(commit=False) # Does not save entry into database yet
+            if request.user.is_authenticated: # Checks if user is logged and sets user
+                budget.user = request.user
+            else:
+                budget.user_id = 1 # If no user is logged in, uses default user
+            budget.save()
+            return redirect('budget')
     else:
         '''Gets logged in user information to display user specific data.'''
         user = request.user
         # Fix categoires to filer by created_by and is_default
         categories = Category.objects.filter(user=user)
-        expenses = Expense.objects.filter(user=user)
+        budget_items = Budget.objects.filter(user=user)
+        category_form = CategoryForm
+        budget_form = BudgetForm(user=request.user)
         context = {
+                'category_form': category_form,
+                'budget_form': budget_form,
                 'categories': categories,
-                'expenses': expenses
+                'budget_items': budget_items,
         }
-        form = CategoryForm
-    return render(request, 'budget.html', {'form': form, **context})
+    return render(request, 'budget.html', context)
 
 @login_required
 def expenses(request):

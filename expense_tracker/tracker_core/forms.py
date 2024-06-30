@@ -25,6 +25,11 @@ class BudgetForm(forms.ModelForm):
         model = Budget
         fields = ('amount', 'category',)
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+        self.fields['category'].queryset = Category.objects.filter(user=user)
+
 class ExpenseForm(forms.ModelForm):
 
     class Meta:
