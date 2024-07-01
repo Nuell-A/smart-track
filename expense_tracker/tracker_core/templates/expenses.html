@@ -3,10 +3,10 @@
 {% block title %}Expenses - Track Smart{% endblock %}
 
 {% block content %}
-    <div class="container mx-auto">    
-        <h1 class="hidden md:block text-xl pl-2 pt-8 mb-4">Expenses</h1>
-        <h1 class="md:hidden text-xl text-center pt-8">Expenses</h1>
-        <div class="hidden md:flex justify-around text-center">
+    <div class="container mx-auto md:full">    
+        <h1 class="hidden md:block text-2xl font-bold pt-8 mb-4">Add Expense</h1>
+        <h1 class="md:hidden text-2xl font-bold text-center pt-8"> Add Expense</h1>
+        <div class="hidden md:block">
             <form method="post">
                 {% csrf_token %}
                 <label for="name">Name:</label>
@@ -20,21 +20,75 @@
                 <button type="submit" class="bg-gray-600 hover:text-white rounded text-gray-300 w-24 h-6 mt-2">Add Expense</button>
             </form>
             <div id="expenses">
-                <h1>Expenses</h1>
-                <ul>
-                    {% for expense in expenses %}
-                        <li>{{ expense.name }} - {{ expense.amount }} - {{ expense.category }} - {{ expense.date }}</li>
-                    {% endfor %}
-                </ul>
+                <h1 class="text-2xl font-bold pt-6 pb-4">Expenses</h1>
+                <table class="table-auto w-full mx-auto">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Name</th>
+                            <th class="px-4 py-2">Amount</th>
+                            <th class="px-4 py-2">Catgory</th>
+                            <th class="px-4 py-2">Date</th>
+                            <th class="px-4 py-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for expense in expenses%}
+                        <tr class="text-center">
+                            <td class="border px-4 py-2">{{ expense.name }}</td>
+                            <td class="border px-4 py-2">{{ expense.amount }}</td>
+                            <td class="border px-4 py-2">{{ expense.category }}</td>
+                            <td class="border px-4 py-2">{{ expense.date }}</td>
+                            <td class="border px-4 py-2">
+                                <button id="expense-delete-bt" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" data-id="{{ expense.id }}">Delete</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="p-2 flex-col md:hidden text-center">
-            <h1>Expenses</h1>
-            <ul>
-                {% for expense in expenses %}
-                    <li>{{ expense.name }} - {{ expense.amount }} - {{ expense.category }} - {{ expense.date }}</li>
-                {% endfor %}
-            </ul>
+            <form method="post">
+                {% csrf_token %}
+                <label for="name">Name:</label>
+                {{ form.name }}
+                <br>
+                <label for="amount">Amount:</label>
+                {{ form.amount }}
+                <br>
+                <label for="category">Category:</label>
+                {{ form.category }}
+                <br>
+                <label for="date">Date:</label>
+                {{ form.date }}
+                <br>
+                <button type="submit" class="bg-gray-600 hover:text-white rounded text-gray-300 w-24 h-6 mt-2">Add Expense</button>
+            </form>
+            <h1 class="text-2xl font-bold">Expenses</h1>
+                <table class="table-auto w-3/4 mx-auto">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2">Name</th>
+                            <th class="px-4 py-2">Amount</th>
+                            <th class="px-4 py-2">Catgory</th>
+                            <th class="px-4 py-2">Date</th>
+                            <th class="px-4 py-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for expense in expenses%}
+                        <tr>
+                            <td class="border px-4 py-2">{{ expense.name }}</td>
+                            <td class="border px-4 py-2">{{ expense.amount }}</td>
+                            <td class="border px-4 py-2">{{ expense.category }}</td>
+                            <td class="border px-4 py-2">{{ expense.date }}</td>
+                            <td class="border px-4 py-2">
+                                <button id="delete-button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" data-id="{{ expense.id }}">Delete</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
         </div>
     </div>
 {% endblock %}

@@ -5,7 +5,7 @@
     <div class="container mx-auto">    
         <h1 class="hidden md:block text-xl pl-2 pt-8 mb-4">Budget</h1>
         <h1 class="md:hidden text-xl text-center pt-8">Budget</h1>
-        <div class="hidden md:flex justify-around text-center">
+        <div class="hidden md:block text-center">
 			<form method="post">
 				{% csrf_token %}
 				<label class="pr-24" for="name">Add a category:</label>
@@ -30,15 +30,30 @@
 					<div class="text-red-500 text-xs">{{ budget_form.amount.errors }}</div>
 				{% endif %}
 				<br>
-				<button type="submit" class="bg-gray-600 hover:text-white rounded text-gray-300 w-24 h-6 mt-2">Add Category</button>
+				<button type="submit" class="bg-gray-600 hover:text-white rounded text-gray-300 w-24 h-6 mt-2">Add Budget</button>
 			</form>
 		<div id="categories">
-			<h1>Category</h1>
-			<ul>
-				{% for category in categories %}
-				<li>{{ category.name }}</li>
-				{% endfor %}
-			</ul>
+			<h1 class="text-2xl font-bold pt-12 pb-4">Categories</h1>
+            <table class="table-auto w-3/4 mx-auto">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Category</th>
+                        <th class="px-4 py-2">Amount</th>
+                        <th class="px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cat in budget_items %}
+                    <tr class="text-center">
+                        <td class="border px-4 py-2">{{ cat.category }}</td>
+                        <td class="border px-4 py-2">{{ cat.amount }}</td>
+                        <td class="border px-4 py-2">
+                            <button class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded font-bold" id="income-delete-bt" data-id="{{ cat.id }}">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>	
 		</div>
         </div>
         <div class="p-2 flex-col md:hidden text-center">

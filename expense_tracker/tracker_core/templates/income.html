@@ -3,10 +3,10 @@
 {% block title %}Income - Track Smart{% endblock %}
 
 {% block content %}
-<div class="container mx-auto">    
-    <h1 class="hidden md:block text-xl pl-2 pt-8 mb-4">Income</h1>
-    <h1 class="md:hidden text-xl text-center pt-8">Income</h1>
-    <div class="hidden md:flex justify-around text-center">
+<div class="container mx-auto w-full md:w-3/4">    
+    <h1 class="hidden md:block text-2xl font-bold pt-8 mb-4">Add Income:</h1>
+    <h1 class="md:hidden text-2xl font-bold text-center pt-8">Add Income:</h1>
+    <div class="hidden md:block">
         <form method="post">
             {% csrf_token %}
             <label for="name">Name:</label>
@@ -17,22 +17,71 @@
             {{ form.date }}
             <button type="submit" class="bg-gray-600 hover:text-white rounded text-gray-300 w-24 h-6 mt-2">Add Income</button>
         </form>
-        <div id="expenses">
-            <h1>Income</h1>
-            <ul>
-                {% for pay in income %}
-                    <li>{{ pay.name }} - {{ pay.amount }} - {{ pay.date }}</li>
-                {% endfor %}
-            </ul>
+        <div id="income">
+            <h1 class="text-2xl font-bold pt-24 pb-4">Income</h1>
+            <table class="table-auto w-3/4 mx-auto">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Amount</th>
+                        <th class="px-4 py-2">Date</th>
+                        <th class="px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pay in income %}
+                    <tr class="text-center">
+                        <td class="border px-4 py-2">{{ pay.name }}</td>
+                        <td class="border px-4 py-2">{{ pay.amount }}</td>
+                        <td class="border px-4 py-2">{{ pay.date }}</td>
+                        <td class="border px-4 py-2">
+                            <button class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded font-bold" id="income-delete-bt" data-id="{{ pay.id }}">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="p-2 flex-col md:hidden text-center">
-        <h1>pay</h1>
-        <ul>
-            {% for pay in income %}
-                <li>{{ pay.name }} - {{ pay.amount }} - {{ pay.date }}</li>
-            {% endfor %}
-        </ul>
+        <form method="post">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            {{ form.name }}
+            <br>
+            <label for="amount">Amount:</label>
+            {{ form.amount }}
+            <br>
+            <label for="date">Date:</label>
+            {{ form.date }}
+            <br>
+            <button type="submit" class="bg-gray-600 hover:text-white rounded text-gray-300 w-24 h-6 mt-2">Add Income</button>
+        </form>
+        <div id="expenses">
+            <h1 class="text-2xl font-bold pt-24 pb-4">Income</h1>
+            <table class="table-auto w-3/4 mx-auto">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Amount</th>
+                        <th class="px-4 py-2">Date</th>
+                        <th class="px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pay in income %}
+                    <tr class="text-center">
+                        <td class="border px-4 py-2">{{ pay.name }}</td>
+                        <td class="border px-4 py-2">{{ pay.amount }}</td>
+                        <td class="border px-4 py-2">{{ pay.date }}</td>
+                        <td class="border px-4 py-2">
+                            <button class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded font-bold" id="income-delete-bt" data-id="{{ pay.id }}">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 {% endblock %}
