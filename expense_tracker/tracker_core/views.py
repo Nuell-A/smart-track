@@ -6,6 +6,7 @@ from .forms import RegistrationForm, CategoryForm, BudgetForm, ExpenseForm, Inco
 from decimal import Decimal, ROUND_HALF_UP
 
 # Create your views here.
+@login_required
 def index(request):
     user = request.user
     # Get totals for user
