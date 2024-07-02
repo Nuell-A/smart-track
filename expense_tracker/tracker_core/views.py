@@ -27,9 +27,13 @@ def index(request):
         # Format the total expenses to two decimal places
         total_income = total_income.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)
 
+    difference = total_income - total_expenses
+    difference = difference.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)
+
     context = {
         'total_income': total_income,
         'total_expenses': total_expenses,
+        'difference': difference,
     }
 
     return render(request, 'index.html', context)

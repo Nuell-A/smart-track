@@ -46,7 +46,7 @@
                     {% for cat in budget_items %}
                     <tr class="text-center">
                         <td class="border px-4 py-2">{{ cat.category }}</td>
-                        <td class="border px-4 py-2">{{ cat.amount }}</td>
+                        <td class="border px-4 py-2">${{ cat.amount }}</td>
                         <td class="border px-4 py-2">
                             <button class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded font-bold" id="income-delete-bt" data-id="{{ cat.id }}">Delete</button>
                         </td>

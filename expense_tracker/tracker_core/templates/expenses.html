@@ -35,7 +35,7 @@
                         {% for expense in expenses%}
                         <tr class="text-center">
                             <td class="border px-4 py-2">{{ expense.name }}</td>
-                            <td class="border px-4 py-2">{{ expense.amount }}</td>
+                            <td class="border px-4 py-2">${{ expense.amount }}</td>
                             <td class="border px-4 py-2">{{ expense.category }}</td>
                             <td class="border px-4 py-2">{{ expense.date }}</td>
                             <td class="border px-4 py-2">
@@ -79,7 +79,7 @@
                         {% for expense in expenses%}
                         <tr>
                             <td class="border px-4 py-2">{{ expense.name }}</td>
-                            <td class="border px-4 py-2">{{ expense.amount }}</td>
+                            <td class="border px-4 py-2">${{ expense.amount }}</td>
                             <td class="border px-4 py-2">{{ expense.category }}</td>
                             <td class="border px-4 py-2">{{ expense.date }}</td>
                             <td class="border px-4 py-2">

@@ -32,7 +32,7 @@
                     {% for pay in income %}
                     <tr class="text-center">
                         <td class="border px-4 py-2">{{ pay.name }}</td>
-                        <td class="border px-4 py-2">{{ pay.amount }}</td>
+                        <td class="border px-4 py-2">${{ pay.amount }}</td>
                         <td class="border px-4 py-2">{{ pay.date }}</td>
                         <td class="border px-4 py-2">
                             <button class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded font-bold" id="income-delete-bt" data-id="{{ pay.id }}">Delete</button>
